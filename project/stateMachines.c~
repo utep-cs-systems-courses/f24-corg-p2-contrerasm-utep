@@ -1,0 +1,34 @@
+#include <msp430.h>
+#include "stateMachines.h"
+#include "led.h"
+#include "buzzer.h"
+#include "switches.h"
+
+void next_state(int state){
+  green_off();
+  red_off();
+  switch(state){
+  case 1:
+    buzzer_set_period(520);
+    break;
+  case 2:
+    flash(5);
+    red_on();
+    red_off();
+    break;
+  case 3:
+    red_on();
+    mcdonalds_jingle();
+    red_off();
+    break;
+  case 4:
+    buzzer_set_period(100);
+    green_on();
+    break;
+  default:
+    red_on();
+    break;
+  }
+  red_on();//light will remain on to let user know its ready
+
+}
